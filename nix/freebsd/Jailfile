@@ -10,3 +10,4 @@ jail=$(zfs list -o mountpoint | grep -E /jails/$name/root$)
 cp -rvp . $jail/root/setup
 iocage exec $name 'make -C ~/setup task-list'
 iocage exec $name 'make -C ~/setup deployment'
+iocage restart $name
