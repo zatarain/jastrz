@@ -1,0 +1,14 @@
+#!/bin/sh
+name=freebsd-ami
+base=12.1-RELEASE
+user=ec2-user
+iocage list --template --header | grep -q $name && iocage destroy -f $name
+iocage create --release $base --name $name vnet=on defaultrouter=192.168.1.254 \
+	notes="Mocking default AMI for EC2 with Free BSD $base with default $user."
+iocage start $name
+jail=$(zfs list -o mountpoint | grep -E /jails/$name/root$)
+iocage exec $name pw useradd $user -m -s /bin/sh -G wheel
+cp -rvp ~ulises/.ssh $jail/home/$user
+iocage exec $name chown -R $user:$user /home/$user
+iocage stop $name
+iocage set template=yes $name

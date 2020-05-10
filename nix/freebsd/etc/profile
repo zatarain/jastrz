@@ -21,8 +21,10 @@ EDITOR=nano; export EDITOR
 PAGER=less; export PAGER
 TERM=xterm-clear; export TERM
 CLICOLOR=yes; export CLICOLOR
-LSCOLORS=exGxcxDxCxHxhxbxBxFxfx
+LSCOLORS=exGxcxDxCxHxhxbxBxFxfx; export LSCOLORS
+PS1=`whoami`'@\H:\w \$ '; export PS1
 
+# Key bindings to fix the  weirdness
 bind "^[[5C" vi-next-word
 bind "^[[1;5C" vi-next-word
 bind "^[[5D" vi-prev-word
@@ -32,7 +34,7 @@ bind "^[[1;5D" vi-prev-word
 HISTSIZE=2000; export HISTSIZE
 alias history='fc -l -n 1 | cat ~/.history - 2> /dev/null | cat -n -'
 trap -- 'fc -l -n 1 >> ~/.history' EXIT
-# seq 1 $HISTSIZE | xargs -Inumber ln -sf ../history-run /usr/bin/history/!number
+seq 1 $HISTSIZE | xargs -Inumber ln -sf ../history-run /usr/bin/history/!number
 PATH=$PATH:/usr/bin/history; export PATH
 
 # iocage environment variables
