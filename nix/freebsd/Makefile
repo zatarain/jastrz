@@ -45,3 +45,7 @@ deployment:
 	-kldload zfs
 	-zpool create kepler /dev/xbd1
 	-mount -t fdescfs null /dev/fd
+	sysctl net.inet.ip.forwarding=1
+	sysctl net.link.bridge.pfil_onlyip=0
+	sysctl net.link.bridge.pfil_bridge=0
+	sysctl net.link.bridge.pfil_member=0
