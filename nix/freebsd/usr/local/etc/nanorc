@@ -1,0 +1,6 @@
+set tabsize 4
+unset tabstospaces
+set linenumbers
+
+## Include all available syntax files
+include "/usr/local/share/nano/*.nanorc"
