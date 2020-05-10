@@ -1,0 +1,46 @@
+# $FreeBSD: releng/12.1/bin/sh/profile 337849 2018-08-15 14:41:24Z brd $
+#
+# System-wide .profile file for sh(1).
+#
+# Uncomment this to give you the default 4.2 behavior, where disk
+# information is shown in K-Blocks
+# BLOCKSIZE=K; export BLOCKSIZE
+#
+# For the setting of languages and character sets please see
+# login.conf(5) and in particular the charset and lang options.
+# For full locales list check /usr/share/locale/*
+# You should also read the setlocale(3) man page for information
+# on how to achieve more precise control of locale settings.
+#
+# Check system messages
+# msgs -q
+# Allow terminal messages
+# mesg y
+ENV=~/.shrc; export ENV
+EDITOR=nano; export EDITOR
+PAGER=less; export PAGER
+TERM=xterm-clear; export TERM
+CLICOLOR=yes; export CLICOLOR
+LSCOLORS=exGxcxDxCxHxhxbxBxFxfx
+
+bind "^[[5C" vi-next-word
+bind "^[[1;5C" vi-next-word
+bind "^[[5D" vi-prev-word
+bind "^[[1;5D" vi-prev-word
+
+# Managing history
+HISTSIZE=2000; export HISTSIZE
+alias history='fc -l -n 1 | cat ~/.history - 2> /dev/null | cat -n -'
+trap -- 'fc -l -n 1 >> ~/.history' EXIT
+# seq 1 $HISTSIZE | xargs -Inumber ln -sf ../history-run /usr/bin/history/!number
+PATH=$PATH:/usr/bin/history; export PATH
+
+# iocage environment variables
+IOCAGE_COLOR=TRUE;              export IOCAGE_COLOR
+IOCAGE_LOGFILE=/var/log/iocage; export IOCAGE_LOGFILE
+IOCAGE_FORCE=FALSE;             export IOCAGE_FORCE
+alias cage="iocage"
+alias kepler="iocage"
+
+alias ll='ls -laFo'
+alias l='ls -l'
