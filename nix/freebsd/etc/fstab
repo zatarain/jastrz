@@ -1,0 +1,3 @@
+# Custom /etc/fstab for FreeBSD VM images
+/dev/gpt/rootfs   /       ufs     rw      1       1
+fdescfs /dev/fd  fdescfs  rw  0  0

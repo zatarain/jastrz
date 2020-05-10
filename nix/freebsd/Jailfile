@@ -1,0 +1,13 @@
+#!/bin/sh
+base=freebsd-ami
+name=ec2-instance-t2micro
+iocage list --header | grep -q $name && iocage destroy -f $name
+iocage list --template --header | grep -q $base || ./$base
+iocage create --template $base --name $name vnet=on ip4_addr="vnet0|192.168.1.100/24"
+iocage set defaultrouter="192.168.1.254" $name
+iocage start $name
+jail=$(zfs list -o mountpoint | grep -E /jails/$name/root$)
+cp -rvp . $jail/root/setup
+iocage exec $name 'make -C ~/setup task-list'
+iocage exec $name 'make -C ~/setup deployment'
+iocage restart $name
