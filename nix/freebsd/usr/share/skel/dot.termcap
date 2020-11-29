@@ -1,2 +1,1 @@
-xterm-256color:mi@:IC=\E[%d@:ei@:ic=\E[@:im@:tc=xterm-new:
-xterm-clear:mi@:IC=\E[%d@:ei@:ic=\E[@:im@:tc=xterm-new:
+xterm-clear:te=\E[?1049l:ti=\E[?1049h:mi@:IC=\E[%d@:ei@:ic=\E[@:im@:tc=xterm-new:
